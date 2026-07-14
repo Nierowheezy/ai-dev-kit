@@ -1,169 +1,226 @@
-You're right — that README was too light. Let’s write a thorough, detailed one that fully explains your kit so anyone (including future you) understands it instantly.
-
----
-
-## `README.md` – complete, detailed
-
-```markdown
 # AI Dev Kit
 
-> My personal, battle‑tested standard for building software with any AI agent — Claude Code, Cursor, Codex, OpenCode, Antigravity, and more.
+> A personal, battle-tested standard for building software with any AI agent — Claude Code, Cursor, Codex, OpenCode, Grok, and more.
 
-It’s a **stack‑agnostic, tool‑agnostic** collection of rules, skills, and memory files.  
-You drop it into a project, give your AI a single instruction, and it knows **exactly** how you work.
+It’s a **stack-agnostic, tool-agnostic** collection of rules, skills, and memory files.  
+Drop it into a project, give your AI a single instruction, and it knows **exactly** how you work.
 
 ---
 
-## 🤔 Why This Exists
+## Why This Exists
 
-AI coding assistants are powerful but forgetful. Without a shared “brain”, you waste time re‑explaining:
-- The tech stack conventions
+AI coding assistants are powerful but forgetful. Without a shared “brain”, you waste time re-explaining:
+
+- Tech stack conventions
 - Design tokens and UI rules
-- The task order and progress
+- Task order and progress
 - Which components already exist
 
-This kit solves that. It’s a **permanent, portable operating manual** for your AI, so every session starts with total context — no repetition, no guessing, no drift.
+This kit is a **permanent, portable operating manual** for your AI, so every session starts with full context — no repetition, no guessing, no drift.
 
 ---
 
-## 📁 Structure
+## Structure
 
 ```
 ai-dev-kit/
-├── agent.md                  # Global system prompt & universal rules
-├── skills/                   # Reusable AI behaviours (Anthropic Skills spec)
-│   ├── ui-component.md       # How to build a UI component from scratch
-│   ├── db-migration.md       # How to write safe database migrations
-│   └── test.md               # How to write and run tests
-├── context/                  # Project‑specific memory & templates
-│   ├── project-overview.md   # Elevator pitch, users, core features
-│   ├── architecture.md       # System components, folder layout, API routes
-│   ├── build-plan.md         # Ordered, atomic task list
-│   ├── code-standards.md     # Stack‑specific conventions (React, Vue, Node…)
-│   ├── ui-tokens.md          # Design tokens (colours, spacing, typography)
-│   ├── ui-rules.md           # Layout rules, responsive behaviour, a11y
-│   ├── ui-registry.md        # Catalogue of existing reusable components
-│   ├── library-docs.md       # Curated usage snippets for installed libraries
-│   ├── progress-tracker.md   # Live status of every task
-│   └── designs/              # Screenshots / Figma exports (optional)
-└── README.md                 # You’re reading it
+├── .agents/
+│   └── skills/
+│       ├── architect/
+│       │   └── SKILL.md
+│       ├── imprint/
+│       │   └── SKILL.md
+│       ├── recover/
+│       │   └── SKILL.md
+│       ├── remember/
+│       │   └── SKILL.md
+│       └── review/
+│           └── SKILL.md
+├── context/
+│   ├── designs/              # Active design screenshots for the current project
+│   ├── designs-old/          # Archived design screenshots
+│   ├── architecture.md
+│   ├── build-plan.md
+│   ├── code-standards.md
+│   ├── library-docs.md
+│   ├── progress-tracker.md
+│   ├── project-overview.md
+│   ├── ui-registry.md
+│   ├── ui-rules.md
+│   ├── ui-rules-old.md       # Previous version of UI rules (reference only)
+│   ├── ui-tokens.md
+│   └── ui-tokens-old.md      # Previous version of UI tokens (reference only)
+├── .gitignore
+├── AGENTS.md
+├── CLAUDE.md
+└── README.md
 ```
-
-### What each file does
-
-| File | Purpose |
-|------|---------|
-| `agent.md` | The AI’s “personality” and core rules. It instructs the AI to read all other files, never guess, follow standards, and use the skills. |
-| `skills/ui-component.md` | A checklist the AI runs when asked `@ui-component`. Ensures consistency: design tokens, states, a11y, registry update. |
-| `skills/db-migration.md` | Safe schema change workflow: check architecture, write up/down, update docs, test. |
-| `skills/test.md` | Forces the AI to write tests after each feature, including accessibility checks. |
-| `context/project-overview.md` | High‑level brief. Fill this once per project. |
-| `context/architecture.md` | Blueprint of the system. Keeps the AI aligned with your intended structure. |
-| `context/build-plan.md` | The master task list. The AI follows this sequentially and marks items done. |
-| `context/code-standards.md` | Concrete coding conventions for your current stack. Has sections for React, Vue, Node, and testing. |
-| `context/ui-tokens.md` | Single source of design truth: colours, fonts, spacing, shadows, breakpoints. |
-| `context/ui-rules.md` | When to use a card vs. a custom border, max‑widths, mobile behaviour, accessibility rules. |
-| `context/ui-registry.md` | Auto‑updated catalogue of every reusable component. Prevents duplication. |
-| `context/library-docs.md` | Copy‑paste‑ready snippets from your actual dependencies. Stops the AI from hallucinating APIs. |
-| `context/progress-tracker.md` | A live table the AI updates after each task, so you always know what’s done. |
 
 ---
 
-## 🚀 Usage — One‑Command Install
+## What Each File Does
 
-### For Claude Code (auto‑discovers skills)
+### Root
+
+| File         | Purpose                                                                                                                                                               |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AGENTS.md`  | The AI’s entry point and core rules. Tells the agent which context files to read (and in what order), lists non-negotiable rules, and points to the available skills. |
+| `CLAUDE.md`  | Thin shim for Claude Code; points at `AGENTS.md` so Claude picks up the same rules automatically.                                                                     |
+| `.gitignore` | Standard ignores (node_modules, env files, build output, OS junk, etc.).                                                                                              |
+| `README.md`  | This file — how the kit works and how to use it.                                                                                                                      |
+
+### Skills (`.agents/skills/`)
+
+| Skill       | Command                                | Purpose                                                                                                                                                            |
+| ----------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `architect` | `/architect`                           | Think through a complex feature before coding. Aligns language, surfaces decisions, and produces an implementation plan you confirm first.                         |
+| `imprint`   | `/imprint`                             | After any new UI component, extract visual patterns and save them to `context/ui-registry.md` so later components stay consistent. Also supports `/imprint audit`. |
+| `review`    | `/review`                              | After a feature, check plan alignment, architecture/design compliance, and production readiness. Reports issues; you decide what to fix.                           |
+| `recover`   | `/recover`                             | When something breaks after a failed fix, diagnose the failure mode (targeted fix vs hard reset vs full rethink) before more prompting.                            |
+| `remember`  | `/remember save` · `/remember restore` | Save session state to `memory.md` at the end of a multi-session feature, or restore it at the start of the next session.                                           |
+
+### Context (`context/`)
+
+| File / folder                          | Purpose                                                                                                          |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `project-overview.md`                  | High-level product brief: what you’re building, problem, pages, flows, in/out of scope. Fill once per project.   |
+| `architecture.md`                      | System blueprint — layers, data flow, boundaries. Keeps the AI aligned with intended structure.                  |
+| `build-plan.md`                        | Master ordered task list. The AI works through it and marks items done.                                          |
+| `code-standards.md`                    | Concrete coding conventions for the current stack (naming, TypeScript, framework rules, testing).                |
+| `ui-tokens.md`                         | Design tokens: colours, fonts, spacing, shadows, breakpoints. Single source of visual truth.                     |
+| `ui-rules.md`                          | When to use which patterns (cards, max-widths, mobile, a11y). Complements tokens with behavioural rules.         |
+| `ui-registry.md`                       | Live catalogue of reusable components and their visual patterns. Updated via `/imprint` after each UI component. |
+| `library-docs.md`                      | Project-specific notes and safe usage patterns for third-party libraries. Reduces API hallucination.             |
+| `progress-tracker.md`                  | Live status table the AI updates after each task so you always know what’s done.                                 |
+| `designs/`                             | Drop current design screenshots here for vision-capable agents.                                                  |
+| `designs-old/`                         | Archived screenshots from earlier iterations.                                                                    |
+| `ui-rules-old.md` / `ui-tokens-old.md` | Previous token/rule snapshots kept for reference; not used as live source of truth.                              |
+
+---
+
+## Usage
+
+### For Claude Code (auto-discovers skills)
+
 ```bash
 npx skills add Nierowheezy/ai-dev-kit
 ```
-Claude Code will automatically load `agent.md` and all skills inside `skills/`.
 
-### For any other AI agent (Cursor, Codex, OpenCode, etc.)
+Claude Code loads `AGENTS.md` / `CLAUDE.md` and the skills under `.agents/skills/`.
+
+### For any other AI agent (Cursor, Codex, OpenCode, Grok, etc.)
+
 ```bash
-npx degit Nierowheezy/ai-dev-kit/context my-project/ai-context
+npx degit Nierowheezy/ai-dev-kit my-project/ai-dev-kit
 ```
-Then, at the start of every session, tell your AI:
-> *“Read every file inside `ai-context/`. Follow `build-plan.md` task by task. Adhere to all rules and use the skills.”*
 
-This works because the kit is just Markdown — no proprietary formats, no tool‑specific magic.
+Or copy the kit into your repo root so paths stay as `context/` and `.agents/skills/`.
+
+At the start of every session, tell your AI something like:
+
+> Read `AGENTS.md`, then every file under `context/` in the order listed there. Follow `build-plan.md` task by task. Adhere to all rules and use the skills when appropriate.
+
+The kit is plain Markdown — no proprietary formats, no tool-specific magic.
 
 ---
 
-## 🧠 The Build Workflow (Step‑by‑Step)
+## The Build Workflow
 
 **1. Initialise a new project**
+
 ```bash
-npx degit Nierowheezy/ai-dev-kit/context my-project/ai-context
+npx degit Nierowheezy/ai-dev-kit my-project/ai-dev-kit
 cd my-project
 ```
 
-**2. Fill the project‑specific context**
-- Open `ai-context/project-overview.md` and describe what you’re building.
-- Open `ai-context/architecture.md` and sketch the system.
-- (Optional) Drop screenshots into `ai-context/designs/`.
+**2. Fill project-specific context**
+
+- Edit `context/project-overview.md` with what you’re building.
+- Sketch the system in `context/architecture.md`.
+- Optionally drop screenshots into `context/designs/`.
+- Trim or expand `context/code-standards.md` for your stack.
 
 **3. Generate a build plan**
-Ask your AI:
-> *“Based on `project-overview.md` and `architecture.md`, generate an ordered, atomic task list and save it in `build-plan.md`.”*
 
-**4. Start the execution loop**
-Pick the first task in `build-plan.md` and instruct the AI:
-> *“Implement task 1.1. Follow `agent.md` and `code-standards.md`. Update `progress-tracker.md` when done.”*
+> Based on `project-overview.md` and `architecture.md`, generate an ordered, atomic task list and save it in `build-plan.md`.
 
-The AI will:
-- Read all context files
-- Write code matching your standards
-- Use the appropriate skill if needed (e.g., `@ui-component`)
-- Register any new component in `ui-registry.md`
-- Mark the task as ✅ Complete
+**4. Architect before complex work**
 
-**5. Review & refine**
-- Test the code.
-- If the AI made a mistake, **don’t just fix it in chat** — update the relevant `.md` file so it never happens again.  
-  (e.g., if it used the wrong spacing, clarify the token in `ui-tokens.md`)
+For non-trivial features:
 
-**6. Repeat** until all tasks are checked off.
+> `/architect` — think through the feature, align on language, and confirm a plan before coding.
 
----
+**5. Execute the loop**
 
-## 🔄 Keeping It Up‑to‑Date
+Pick the next task in `build-plan.md`:
 
-Your kit is versioned. Over time:
-- Add new skills to `skills/` when you spot a repeating pattern.
-- Archive old designs into `designs-old/` so the AI can still reference them if needed.
-- When you start a new project, you can override any `context/` file — the repo just gives you the default templates.
-- Commit and tag releases (`v1.0`, `v1.1`) so you can track what worked best.
+> Implement the next open task. Follow `AGENTS.md` and `code-standards.md`. Update `progress-tracker.md` when done.
 
----
+The AI should:
 
-## 💡 Pro Tips
+- Read the required context files
+- Write code that matches your standards
+- Run `/imprint` after new UI components
+- Register components in `ui-registry.md`
+- Mark tasks complete in `progress-tracker.md`
 
-- **Small, atomic tasks** – A task like “Build dashboard” is too vague. Break it down into “Dashboard layout shell”, “Stats card component”, “Connect stats to API”.
-- **Vision + text** – If your AI supports images, always include a screenshot in `designs/`. It matches details you’d need paragraphs to describe.
-- **Pin critical rules** – In `agent.md`, add lines like “Never use inline styles – always Tailwind classes” to prevent common mistakes.
-- **Review early, review often** – Don’t let the AI code 10 tasks unchecked. A tiny error can cascade.
+**6. Review**
 
----
+> `/review` — check plan alignment, system integrity, and production readiness before shipping or moving on.
 
-## 🔧 Tech Stack Adaptation
+**7. Recover if stuck**
 
-The kit is designed to work with any stack. Inside `code-standards.md`, you’ll find separate sections for:
-- React / Next.js
-- Vue / Nuxt
-- Node / NestJS
-- Testing (Vitest/Jest/Playwright)
+If a fix fails once and the same problem persists:
 
-When you start a project, just **delete the sections that don’t apply** and expand your stack’s section. The AI will follow what remains.
+> `/recover` — diagnose failure mode, then target fix, hard reset, or rethink.
+
+**8. Remember across sessions**
+
+- End of session: `/remember save` → writes `memory.md`
+- Start of next session: `/remember restore`
+
+**9. Refine the kit**
+
+If the AI makes a mistake, don’t only fix it in chat — update the relevant `.md` file so it never happens again (e.g. clarify a token in `ui-tokens.md`).
 
 ---
 
-## 🤝 Credits & Inspiration
+## Keeping It Up to Date
+
+- Add new skills under `.agents/skills/<name>/SKILL.md` when you spot a repeating workflow.
+- Archive old designs into `context/designs-old/`.
+- Override any `context/` file per project — the repo only ships defaults/templates.
+- Commit and tag releases (`v1.0`, `v1.1`) so you can track what worked.
+
+---
+
+## Pro Tips
+
+- **Atomic tasks** — “Build dashboard” is too vague. Prefer “Dashboard layout shell”, “Stats card”, “Wire stats to API”.
+- **Vision + text** — If the agent supports images, put screenshots in `context/designs/`.
+- **Pin critical rules** — Put non-negotiables in `AGENTS.md` (e.g. never hardcode hex; always use design tokens).
+- **Review often** — Don’t let the AI run ten tasks unchecked; small drift compounds.
+- **Use skills on purpose** — `/architect` before complex features, `/imprint` after UI, `/review` before demos, `/recover` after failed fixes, `/remember` between sessions.
+
+---
+
+## Tech Stack Adaptation
+
+The kit is stack-agnostic. Customise:
+
+- `context/code-standards.md` for your framework and language
+- `context/library-docs.md` for the libraries you actually use
+- `context/ui-tokens.md` / `context/ui-rules.md` for your design system
+
+Delete or ignore sections that don’t apply. The AI follows what remains.
+
+---
+
+## Credits
 
 Built by [Nierowheezy](https://github.com/Nierowheezy).  
-Inspired by the [Anthropic Skills specification](https://docs.anthropic.com/en/docs/claude-code/skills) and a desire to make AI‑assisted coding predictable, repeatable, and actually enjoyable.
+Inspired by the [Anthropic Skills specification](https://docs.anthropic.com/en/docs/claude-code/skills) and a desire to make AI-assisted coding predictable, repeatable, and actually enjoyable.
 
 ---
 
 **Now go build something great — with your AI sidekick perfectly in sync.**
-```
-
-

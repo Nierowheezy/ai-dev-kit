@@ -1,34 +1,21 @@
 # UI Registry
 
-<!-- Live catalogue of every reusable component. The AI updates this automatically. -->
+Living document. Updated after every component is built. Read this before building any new component — match existing patterns exactly before inventing new ones.
 
-| Component | Path | Props / Slots | Usage Example |
-| --------- | ---- | ------------- | ------------- |
-| _Empty_   | –    | –             | –             |
+---
 
-**Instructions for the AI:**
-After creating a new UI component:
+## How to Use
 
-1. Add a row to this table with its import path, props, and a minimal usage example.
-2. Never duplicate a component already listed here.
+Before building any component:
 
-````
+1. Check if a similar component already exists here
+2. If yes — match its exact classes
+3. If no — build it following ui-rules.md and ui-tokens.md, then add it here
 
-To write it directly from the terminal:
+After building any component — update this file with the component name, file path, and exact classes used.
 
-```bash
-cat > context/ui-registry.md << 'ENDOFFILE'
-# UI Registry
+---
 
-<!-- Live catalogue of every reusable component. The AI updates this automatically. -->
+## Components
 
-| Component   | Path                     | Props / Slots                  | Usage Example                              |
-|-------------|--------------------------|--------------------------------|--------------------------------------------|
-| _Empty_     | –                        | –                              | –                                          |
-
-**Instructions for the AI:**
-After creating a new UI component:
-1. Add a row to this table with its import path, props, and a minimal usage example.
-2. Never duplicate a component already listed here.
-
-````
+_Empty. Components will be added here as they are built._

@@ -1,40 +1,59 @@
 # Progress Tracker
 
-<!-- Updated by the AI after each task. Keeps everyone (and future sessions) in sync. -->
+Update this file after every completed feature. Any AI agent reading this should immediately know what is done, what is in progress, and what is next.
 
-| Task ID | Description | Status | Notes |
-| ------- | ----------- | ------ | ----- |
-| –       | –           | –      | –     |
+---
 
-**Status legend:**
+## Current Status
 
-- `🟡 In Progress`
-- `✅ Complete`
-- `⏳ Blocked`
+**Phase:**
+**Last completed:**
+**Next:**
 
-**Instructions for the AI:**  
-After finishing a task, find it in `build-plan.md`, mark it `✅ Complete` here, and add any relevant notes (e.g., “used prisma migration 003”).
+---
 
-````
+## Progress
 
-To write it directly from the terminal:
+### Phase 1 — Foundation
 
-```bash
-cat > context/progress-tracker.md << 'ENDOFFILE'
-# Progress Tracker
+- [ ] 01 Homepage
+- [ ] 02 Auth
+- [ ] 03 PostHog Initialization
+- [ ] 04 Database Schema
 
-<!-- Updated by the AI after each task. Keeps everyone (and future sessions) in sync. -->
+### Phase 2 — Profile Page
 
-| Task ID | Description | Status | Notes |
-|---------|-------------|--------|-------|
-| –       | –           | –      | –     |
+- [ ] 05 Profile Page — Full UI
+- [ ] 06 Profile Save Logic
+- [ ] 07 AI Profile Extraction from Resume
+- [ ] 08 Resume PDF Generation from Profile
 
-**Status legend:**
-- `🟡 In Progress`
-- `✅ Complete`
-- `⏳ Blocked`
+### Phase 3 — Find Jobs Page
 
-**Instructions for the AI:**
-After finishing a task, find it in `build-plan.md`, mark it `✅ Complete` here, and add any relevant notes (e.g., “used prisma migration 003”).
+- [ ] 09 Find Jobs Page — Full UI
+- [ ] 10 Adzuna Job Discovery
+- [ ] 11 Filter + Sort + Pagination
 
-````
+### Phase 4 — Job Details Page
+
+- [ ] 12 Job Details Page — Full UI
+- [ ] 13 Company Research Agent
+
+### Phase 5 — Dashboard
+
+- [ ] 14 Dashboard Page — Full UI
+- [ ] 15 Stats Bar — Real Data
+- [ ] 16 Recent Activity — Real Data
+- [ ] 17 Analytics Charts — PostHog Data
+
+---
+
+## Decisions Made During Build
+
+_Add decisions here as they are made during implementation._
+
+---
+
+## Notes
+
+_Add notes here as the build progresses — workarounds, patterns, anything that differs from the context files._
